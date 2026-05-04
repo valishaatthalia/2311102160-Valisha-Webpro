@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gacha Doorprize Misteri</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f0c29; /* Background gelap */
+            background-image: linear-gradient(315deg, #0f0c29 0%, #302b63 74%, #24243e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .neon-card {
+            background: rgba(20, 20, 30, 0.8);
+            border: 2px solid #ff0055;
+            border-radius: 15px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.5), inset 0 0 15px rgba(255, 0, 85, 0.2);
+            max-width: 500px;
+            width: 90%;
+            transition: transform 0.3s;
+        }
+
+        .neon-card:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #00f2fe;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-weight: 800;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: -webkit-linear-gradient(#ff0055, #ff7a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 0px 10px rgba(255, 0, 85, 0.3);
+        }
+
+        p {
+            font-size: 1rem;
+            color: #b3b3b3;
+            margin-bottom: 40px;
+        }
+
+        .btn-gacha {
+            background: linear-gradient(90deg, #ff0055, #ff7a00);
+            border: none;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 15px 50px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 0, 85, 0.6);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-gacha:hover {
+            box-shadow: 0 5px 30px rgba(255, 0, 85, 0.9);
+            transform: translateY(-3px);
+        }
+
+        .btn-gacha:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 10px rgba(255, 0, 85, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="neon-card">
+        <h2>Event Spesial</h2>
+        <h1>MYSTERY BOX</h1>
+        <p>Uji keberuntunganmu! Tekan tombol di bawah untuk membuka kotak misteri. Siapa tahu kamu beruntung!</p>
+        
+        <button class="btn-gacha" onclick="bukaKotak()">
+            BUKA KOTAK
+        </button>
+    </div>
+
+    <script>
+        function bukaKotak() {
+            // Daftar hadiah (termasuk ZONK)
+            const daftarHadiah = [
+                "MacBook Pro M3", 
+                "Voucher Belanja Rp 500.000", 
+                "Sepeda Lipat Keren", 
+                "ZONK! Coba lagi lain waktu 😂", 
+                "ZONK! Kamu kurang beruntung 😭",
+                "Uang Tunai Rp 1.000.000",
+                "Smartphone Samsung S24",
+                "Payung Cantik"
+            ];
+
+            // Mengacak hadiah
+            const hadiahAcak = daftarHadiah[Math.floor(Math.random() * daftarHadiah.length)];
+            const isZonk = hadiahAcak.includes("ZONK");
+
+            // Menampilkan efek loading palsu biar lebih deg-degan
+            let timerInterval;
+            Swal.fire({
+                title: 'Membuka Kotak...',
+                html: 'Tunggu sebentar, sedang mengacak hadiah!',
+                timer: 1500,
+                timerProgressBar: true,
+                background: '#1a1a2e',
+                color: '#fff',
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then((result) => {
+                // Setelah loading selesai, cek apakah menang atau zonk
+                if (isZonk) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'YAAAAHHH...',
+                        text: hadiahAcak,
+                        background: '#1a1a2e',
+                        color: '#fff',
+                        confirmButtonColor: '#ff0055'
+                    });
+                } else {
+                    // Jika menang, tembak confetti
+                    confetti({
+                        particleCount: 200,
+                        spread: 100,
+                        origin: { y: 0.5 },
+                        colors: ['#ff0055', '#00f2fe', '#ff7a00', '#ffffff']
+                    });
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'JACKPOT!',
+                        html: `Selamat! Kamu berhasil mendapatkan:<br><br><strong style="font-size: 24px; color: #00f2fe;">${hadiahAcak}</strong>`,
+                        background: '#1a1a2e',
+                        color: '#fff',
+                        confirmButtonColor: '#00f2fe',
+                        confirmButtonText: 'Klaim Hadiah'
+                    });
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
