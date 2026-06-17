@@ -48,7 +48,7 @@ class CounterProvider with ChangeNotifier {
       importance: Importance.max,
       priority: Priority.high,
       ticker: 'ticker',
-      color: Colors.deepPurple,
+      color: Colors.blue,
     );
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
       title: 'Pertemuan 13',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
+          seedColor: Colors.blue,
           brightness: Brightness.light,
         ),
         useMaterial3: true,
@@ -174,7 +174,7 @@ class _CounterScreenState extends State<CounterScreen> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'VALISHA ATTHALIA NAURA IRFAN',
+                      'NAJWA HUMAIRAH',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 18,
@@ -190,7 +190,7 @@ class _CounterScreenState extends State<CounterScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        'NIM: 2311102160',
+                        'NIM: 2311102134',
                         style: TextStyle(
                           fontSize: 15,
                           color: Theme.of(context).colorScheme.onSecondaryContainer,
