@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2311102160 - Valisha Atthalia Naura Irfan</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Spesial Ramadan!</h1>
+        <p>Semoga ibadah puasamu lancar hari ini. Coba klik tombol di bawah untuk melihat kejutanmu!</p>
+        <button id="tombol-thr" class="btn-utama">Ambil Kejutan</button>
+    </div>
+
+    <div id="modal-thr" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Alhamdulillah!</h2>
+            <p>Selamat anda mendapatkan THR!</p>
+            <button id="tutup-modal" class="btn-tutup">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#tombol-thr").click(function() {
+                $("#modal-thr").fadeIn(400); 
+            });
+
+            $("#tutup-modal").click(function() {
+                $("#modal-thr").fadeOut(300);
+            });
+
+            $(".modal-overlay").click(function(event) {
+                if (event.target.id === "modal-thr") {
+                    $("#modal-thr").fadeOut(300);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
